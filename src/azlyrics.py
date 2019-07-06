@@ -1,4 +1,6 @@
 import random
+import time
+
 import requests
 
 from bs4 import BeautifulSoup
@@ -16,6 +18,8 @@ def _get_html(url):
         except Exception as e:
             if i == RETRIES_AMOUNT - 1:
                 print(f'Unable to retrieve HTML from {url}: {e}')
+            else:
+                time.sleep(SLEEP_TIME_BETWEEN_RETRIES)
     return None
 
 
