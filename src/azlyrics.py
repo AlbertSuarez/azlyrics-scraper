@@ -9,17 +9,22 @@ from src import *
 
 
 def _get_html(url):
-    for i in range(0, RETRIES_AMOUNT):
+    time.sleep(random.uniform(SCRAPE_RTD_MINIMUM, SCRAPE_RTD_MAXIMUM))  # RTD
+    for i in range(0, SCRAPE_RETRIES_AMOUNT):
         try:
-            response = requests.get(url, headers={'User-Agent': random.choice(USER_AGENT_LIST)})
+            if SCRAPE_USER_AGENT_USE_RANDOM:
+                headers = {'User-Agent': random.choice(SCRAPE_USER_AGENT_LIST)}
+            else:
+                headers = {'User-Agent': SCRAPE_USER_AGENT}
+            response = requests.get(url, headers=headers)
             assert response.ok
             html_content = response.content
             return html_content
         except Exception as e:
-            if i == RETRIES_AMOUNT - 1:
+            if i == SCRAPE_RETRIES_AMOUNT - 1:
                 print(f'Unable to retrieve HTML from {url}: {e}')
             else:
-                time.sleep(SLEEP_TIME_BETWEEN_RETRIES)
+                time.sleep(SCRAPE_SLEEP_TIME_BETWEEN_RETRIES)
     return None
 
 
