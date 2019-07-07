@@ -1,6 +1,7 @@
 requests==2.22.0
 beautifulsoup4==4.7.1
 tqdm==4.32.2
+Unidecode==1.1.1
 ## The following requirements were added by pip freeze:
 certifi==2019.6.16
 chardet==3.0.4
