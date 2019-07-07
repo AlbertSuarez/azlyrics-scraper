@@ -17,12 +17,13 @@ def exists_song(csv_letter, artist_url, song_url):
 
 
 def append_to_csv(artist_name, artist_url, song_name, song_url, song_lyrics, csv_letter):
-    csv_file_name = f'{CSV_FILE}_{csv_letter}.csv'
-    exists_file = os.path.isfile(csv_file_name)
-    with open(csv_file_name, 'a') as file:
-        if not exists_file:
-            file.write(
-                f'"{CSV_HEADER_ARTIST_NAME}","{CSV_HEADER_ARTIST_URL}",'
-                f'"{CSV_HEADER_SONG_NAME}","{CSV_HEADER_SONG_URL}","{CSV_HEADER_LYRICS}"'
-            )
-        file.write(f'\n"{artist_name}","{artist_url}","{song_name}","{song_url}","{song_lyrics}"')
+    if song_lyrics:
+        csv_file_name = f'{CSV_FILE}_{csv_letter}.csv'
+        exists_file = os.path.isfile(csv_file_name)
+        with open(csv_file_name, 'a') as file:
+            if not exists_file:
+                file.write(
+                    f'"{CSV_HEADER_ARTIST_NAME}","{CSV_HEADER_ARTIST_URL}",'
+                    f'"{CSV_HEADER_SONG_NAME}","{CSV_HEADER_SONG_URL}","{CSV_HEADER_LYRICS}"'
+                )
+            file.write(f'\n"{artist_name}","{artist_url}","{song_name}","{song_url}","{song_lyrics}"')

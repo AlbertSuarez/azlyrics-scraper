@@ -31,17 +31,20 @@ def _get_html(url):
 def get_artist_url_list(artist_letter):
     artist_url_list = []
 
-    artist_letter_url = f'{AZ_LYRICS_BASE_URL}/{artist_letter}.html'
-    html_content = _get_html(artist_letter_url)
-    if html_content:
-        soup = BeautifulSoup(html_content, 'html.parser')
+    try:
+        artist_letter_url = f'{AZ_LYRICS_BASE_URL}/{artist_letter}.html'
+        html_content = _get_html(artist_letter_url)
+        if html_content:
+            soup = BeautifulSoup(html_content, 'html.parser')
 
-        column_list = soup.find_all('div', {'class': 'artist-col'})
-        for column in column_list:
-            for a in column.find_all('a'):
-                artist_name = string_cleaner.clean_name(a.text)
-                artist_url = string_cleaner.clean_url('{}/{}'.format(AZ_LYRICS_BASE_URL, a['href']))
-                artist_url_list.append((artist_name, artist_url))
+            column_list = soup.find_all('div', {'class': 'artist-col'})
+            for column in column_list:
+                for a in column.find_all('a'):
+                    artist_name = string_cleaner.clean_name(a.text)
+                    artist_url = string_cleaner.clean_url('{}/{}'.format(AZ_LYRICS_BASE_URL, a['href']))
+                    artist_url_list.append((artist_name, artist_url))
+    except Exception as e:
+        print(f'Error while getting artists from letter {artist_letter}: {e}')
 
     return artist_url_list
 
@@ -49,15 +52,18 @@ def get_artist_url_list(artist_letter):
 def get_song_url_list(artist_url):
     song_url_list = []
 
-    html_content = _get_html(artist_url)
-    if html_content:
-        soup = BeautifulSoup(html_content, 'html.parser')
+    try:
+        html_content = _get_html(artist_url)
+        if html_content:
+            soup = BeautifulSoup(html_content, 'html.parser')
 
-        list_album_div = soup.find('div', {'id': 'listAlbum'})
-        for a in list_album_div.find_all('a'):
-            song_name = string_cleaner.clean_name(a.text)
-            artist_url = string_cleaner.clean_url('{}/{}'.format(AZ_LYRICS_BASE_URL, a['href'].replace('../', '')))
-            song_url_list.append((song_name, artist_url))
+            list_album_div = soup.find('div', {'id': 'listAlbum'})
+            for a in list_album_div.find_all('a'):
+                song_name = string_cleaner.clean_name(a.text)
+                artist_url = string_cleaner.clean_url('{}/{}'.format(AZ_LYRICS_BASE_URL, a['href'].replace('../', '')))
+                song_url_list.append((song_name, artist_url))
+    except Exception as e:
+        print(f'Error while getting songs from artist {artist_url}: {e}')
 
     return song_url_list
 
@@ -65,11 +71,14 @@ def get_song_url_list(artist_url):
 def get_song_lyrics(song_url):
     song_lyrics = ''
 
-    html_content = _get_html(song_url)
-    if html_content:
-        soup = BeautifulSoup(html_content, 'html.parser')
-        div_list = [div.text for div in soup.find_all('div', {'class': None})]
-        song_lyrics = max(div_list, key=len)
-        song_lyrics = string_cleaner.clean_lyrics(song_lyrics)
+    try:
+        html_content = _get_html(song_url)
+        if html_content:
+            soup = BeautifulSoup(html_content, 'html.parser')
+            div_list = [div.text for div in soup.find_all('div', {'class': None})]
+            song_lyrics = max(div_list, key=len)
+            song_lyrics = string_cleaner.clean_lyrics(song_lyrics)
+    except Exception as e:
+        print(f'Error while getting lyrics from song {song_url}: {e}')
 
     return song_lyrics
