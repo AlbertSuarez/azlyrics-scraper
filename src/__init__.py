@@ -24,6 +24,38 @@ SCRAPE_USER_AGENT_LIST = [
 SCRAPE_RETRIES_AMOUNT = 3
 SCRAPE_SLEEP_TIME_BETWEEN_RETRIES = 10
 
+CSV_FILE = 'data/azlyrics_lyrics'
+CSV_HEADER_ARTIST_NAME = 'ARTIST_NAME'
+CSV_HEADER_ARTIST_URL = 'ARTIST_URL'
+CSV_HEADER_SONG_NAME = 'SONG_NAME'
+CSV_HEADER_SONG_URL = 'SONG_URL'
+CSV_HEADER_LYRICS = 'LYRICS'
+
+STR_CLEAN_TIMES = 3
+STR_CLEAN_DICT = {
+    '\n\n': '\n',
+    '\n\r\n': '\n',
+    '\r': '',
+    '\n': ', ',
+    '  ': ' ',
+    ' ,': ',',
+    ' .': '.',
+    ' :': ':',
+    ' !': '!',
+    ' ?': '?',
+    ',,': ',',
+    '..': '.',
+    '::': ':',
+    '!!': '!',
+    '??': '?',
+    '.,': '.',
+    '.:': '.',
+    ',.': ',',
+    ',:': ',',
+    ':,': ':',
+    ':.': ':'
+}
+
 
 __all__ = [
     'AZ_LYRICS_BASE_URL',
@@ -34,5 +66,13 @@ __all__ = [
     'SCRAPE_USER_AGENT',
     'SCRAPE_USER_AGENT_LIST',
     'SCRAPE_RETRIES_AMOUNT',
-    'SCRAPE_SLEEP_TIME_BETWEEN_RETRIES'
+    'SCRAPE_SLEEP_TIME_BETWEEN_RETRIES',
+    'CSV_FILE',
+    'CSV_HEADER_ARTIST_NAME',
+    'CSV_HEADER_ARTIST_URL',
+    'CSV_HEADER_SONG_NAME',
+    'CSV_HEADER_SONG_URL',
+    'CSV_HEADER_LYRICS',
+    'STR_CLEAN_TIMES',
+    'STR_CLEAN_DICT'
 ]

@@ -1,11 +1,11 @@
-import random
 import time
-
+import random
 import requests
 
 from bs4 import BeautifulSoup
 
 from src import *
+from src import string_cleaner
 
 
 def _get_html(url):
@@ -39,8 +39,37 @@ def get_artist_url_list(artist_letter):
         column_list = soup.find_all('div', {'class': 'artist-col'})
         for column in column_list:
             for a in column.find_all('a'):
-                artist_name = a.text
-                artist_url = '{}/{}'.format(AZ_LYRICS_BASE_URL, a['href'])
+                artist_name = string_cleaner.clean_name(a.text)
+                artist_url = string_cleaner.clean_url('{}/{}'.format(AZ_LYRICS_BASE_URL, a['href']))
                 artist_url_list.append((artist_name, artist_url))
 
     return artist_url_list
+
+
+def get_song_url_list(artist_url):
+    song_url_list = []
+
+    html_content = _get_html(artist_url)
+    if html_content:
+        soup = BeautifulSoup(html_content, 'html.parser')
+
+        list_album_div = soup.find('div', {'id': 'listAlbum'})
+        for a in list_album_div.find_all('a'):
+            song_name = string_cleaner.clean_name(a.text)
+            artist_url = string_cleaner.clean_url('{}/{}'.format(AZ_LYRICS_BASE_URL, a['href'].replace('../', '')))
+            song_url_list.append((song_name, artist_url))
+
+    return song_url_list
+
+
+def get_song_lyrics(song_url):
+    song_lyrics = ''
+
+    html_content = _get_html(song_url)
+    if html_content:
+        soup = BeautifulSoup(html_content, 'html.parser')
+        div_list = [div.text for div in soup.find_all('div', {'class': None})]
+        song_lyrics = max(div_list, key=len)
+        song_lyrics = string_cleaner.clean_lyrics(song_lyrics)
+
+    return song_lyrics
