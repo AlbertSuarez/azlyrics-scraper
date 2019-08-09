@@ -1,3 +1,5 @@
+import time
+
 from boxsdk import JWTAuth
 from boxsdk import Client
 
@@ -11,6 +13,7 @@ def create_folder(folder_name):
             sub_folder = box_client.folder(BOX_FOLDER_ROOT_ID).create_subfolder(folder_name)
             return sub_folder.id
         except Exception as e:
+            time.sleep(BOX_RTM)
             if i == BOX_RETRIES - 1:
                 print(f'Error calling Box API creating the folder [{folder_name}] into folder root: {e}')
     return None
@@ -27,6 +30,7 @@ def create_shared_link(folder_id):
             )
             return shared_link
         except Exception as e:
+            time.sleep(BOX_RTM)
             if i == BOX_RETRIES - 1:
                 print(f'Error calling Box API creating a shared link for folder [{folder_id}]: {e}')
     return None
@@ -41,6 +45,7 @@ def search_file(folder_id, file_name):
                     return result.id
             return None
         except Exception as e:
+            time.sleep(BOX_RTM)
             if i == BOX_RETRIES - 1:
                 print(f'Error calling Box API searching files into folder [{folder_id}] with name [{file_name}]: {e}')
     return None
@@ -53,6 +58,7 @@ def upload_file(folder_id, file_path):
             file_name = file_path.split('/')[-1]
             return box_client.folder(folder_id).upload(file_path, file_name).id
         except Exception as e:
+            time.sleep(BOX_RTM)
             if i == BOX_RETRIES - 1:
                 print(f'Error calling Box API uploading the file [{file_path}] to folder with id [{folder_id}]: {e}')
     return None
@@ -64,6 +70,7 @@ def update_file(file_id, file_path):
         try:
             return box_client.file(file_id).update_contents(file_path).id
         except Exception as e:
+            time.sleep(BOX_RTM)
             if i == BOX_RETRIES - 1:
                 print(f'Error calling Box API updating the file [{file_id}] with file [{file_path}]: {e}')
     return None
@@ -77,6 +84,7 @@ def download_file(file_id, file_path):
                 box_client.file(file_id).download_to(file)
             return True
         except Exception as e:
+            time.sleep(BOX_RTM)
             if i == BOX_RETRIES - 1:
                 print(f'Error calling Box API downloading the file [{file_id}] to file [{file_path}]: {e}')
     return None
