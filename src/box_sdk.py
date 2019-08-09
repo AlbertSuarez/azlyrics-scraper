@@ -51,7 +51,7 @@ def upload_file(folder_id, file_path):
     for i in range(0, BOX_RETRIES):
         try:
             file_name = file_path.split('/')[-1]
-            return box_client.folder(folder_id).upload(file_path, file_name)
+            return box_client.folder(folder_id).upload(file_path, file_name).id
         except Exception as e:
             if i == BOX_RETRIES - 1:
                 print(f'Error calling Box API uploading the file [{file_path}] to folder with id [{folder_id}]: {e}')
@@ -62,7 +62,7 @@ def update_file(file_id, file_path):
     box_client = Client(JWTAuth.from_settings_file(BOX_CONFIG_FILE_PATH))
     for i in range(0, BOX_RETRIES):
         try:
-            return box_client.file(file_id).update_contents(file_path)
+            return box_client.file(file_id).update_contents(file_path).id
         except Exception as e:
             if i == BOX_RETRIES - 1:
                 print(f'Error calling Box API updating the file [{file_id}] with file [{file_path}]: {e}')
