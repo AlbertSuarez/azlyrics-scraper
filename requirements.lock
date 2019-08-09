@@ -2,9 +2,20 @@ requests==2.22.0
 beautifulsoup4==4.7.1
 tqdm==4.32.2
 Unidecode==1.1.1
+boxsdk==2.5.0
 ## The following requirements were added by pip freeze:
+asn1crypto==0.24.0
+attrs==19.1.0
 certifi==2019.6.16
+cffi==1.12.3
 chardet==3.0.4
+cryptography==2.7
+dropbox==9.4.0
 idna==2.8
+pycparser==2.19
+PyJWT==1.7.1
+requests-toolbelt==0.9.1
+six==1.12.0
 soupsieve==1.9.2
 urllib3==1.25.3
+wrapt==1.11.2
