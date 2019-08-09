@@ -1,4 +1,4 @@
-requests
+requests[socks,security]
 beautifulsoup4
 tqdm
 Unidecode

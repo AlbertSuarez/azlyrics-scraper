@@ -16,7 +16,8 @@ def _get_html(url):
                 headers = {'User-Agent': random.choice(SCRAPE_USER_AGENT_LIST)}
             else:
                 headers = {'User-Agent': SCRAPE_USER_AGENT}
-            response = requests.get(url, headers=headers)
+            proxies = {'http': SCRAPE_PROXY, 'https': SCRAPE_PROXY}
+            response = requests.get(url, proxies=proxies, headers=headers)
             assert response.ok
             html_content = response.content
             return html_content
