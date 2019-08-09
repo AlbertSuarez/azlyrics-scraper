@@ -56,6 +56,8 @@ STR_CLEAN_DICT = {
     ':.': ':'
 }
 
+BOX_CONFIG_FILE_PATH = 'data/jwt_config.json'
+
 
 __all__ = [
     'AZ_LYRICS_BASE_URL',
@@ -74,5 +76,6 @@ __all__ = [
     'CSV_HEADER_SONG_URL',
     'CSV_HEADER_LYRICS',
     'STR_CLEAN_TIMES',
-    'STR_CLEAN_DICT'
+    'STR_CLEAN_DICT',
+    'BOX_CONFIG_FILE_PATH'
 ]
