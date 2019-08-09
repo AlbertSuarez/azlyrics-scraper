@@ -32,14 +32,51 @@ def create_shared_link(folder_id):
     return None
 
 
-def upload_file(file_path):
+def search_file(folder_id, file_name):
     box_client = Client(JWTAuth.from_settings_file(BOX_CONFIG_FILE_PATH))
     for i in range(0, BOX_RETRIES):
         try:
-            folder_id = '0'
+            for result in box_client.folder(folder_id).get_items():
+                if result.name == file_name:
+                    return result.id
+            return None
+        except Exception as e:
+            if i == BOX_RETRIES - 1:
+                print(f'Error calling Box API searching files into folder [{folder_id}] with name [{file_name}]: {e}')
+    return None
+
+
+def upload_file(folder_id, file_path):
+    box_client = Client(JWTAuth.from_settings_file(BOX_CONFIG_FILE_PATH))
+    for i in range(0, BOX_RETRIES):
+        try:
             file_name = file_path.split('/')[-1]
             return box_client.folder(folder_id).upload(file_path, file_name)
         except Exception as e:
             if i == BOX_RETRIES - 1:
                 print(f'Error calling Box API uploading the file [{file_path}] to folder with id [{folder_id}]: {e}')
+    return None
+
+
+def update_file(file_id, file_path):
+    box_client = Client(JWTAuth.from_settings_file(BOX_CONFIG_FILE_PATH))
+    for i in range(0, BOX_RETRIES):
+        try:
+            return box_client.file(file_id).update_contents(file_path)
+        except Exception as e:
+            if i == BOX_RETRIES - 1:
+                print(f'Error calling Box API updating the file [{file_id}] with file [{file_path}]: {e}')
+    return None
+
+
+def download_file(file_id, file_path):
+    box_client = Client(JWTAuth.from_settings_file(BOX_CONFIG_FILE_PATH))
+    for i in range(0, BOX_RETRIES):
+        try:
+            with open(file_path, 'wb') as file:
+                box_client.file(file_id).download_to(file)
+            return True
+        except Exception as e:
+            if i == BOX_RETRIES - 1:
+                print(f'Error calling Box API downloading the file [{file_id}] to file [{file_path}]: {e}')
     return None
