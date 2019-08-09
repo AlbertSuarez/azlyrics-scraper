@@ -7,6 +7,10 @@ from src import azlyrics, csv_parser, box_sdk
 
 
 def scrape():
+    """
+    Processes the main function of the scraper.
+    :return: All AZLyrics scraped.
+    """
     for artist_letter in tqdm(AZ_LYRICS_ARTIST_LETTER_LIST, total=len(AZ_LYRICS_ARTIST_LETTER_LIST)):
         # Downloads file if it is available on Box folder.
         csv_file_name = f'{CSV_FILE}_{artist_letter}.csv'

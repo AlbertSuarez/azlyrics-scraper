@@ -9,6 +9,11 @@ from src import string_cleaner
 
 
 def _get_html(url):
+    """
+    Retrieves the HTML content given a Internet accessible URL.
+    :param url: URL to retrieve.
+    :return: HTML content formatted as String, None if there was an error.
+    """
     time.sleep(random.uniform(SCRAPE_RTD_MINIMUM, SCRAPE_RTD_MAXIMUM))  # RTD
     for i in range(0, SCRAPE_RETRIES_AMOUNT):
         try:
@@ -29,6 +34,11 @@ def _get_html(url):
 
 
 def get_artist_url_list(artist_letter):
+    """
+    Retrieves the AZLyrics website URLs for all the artists given its first character.
+    :param artist_letter: First character of an artist.
+    :return: List of pairs containing the artist name and its AZLyrics URL.
+    """
     artist_url_list = []
 
     try:
@@ -50,6 +60,11 @@ def get_artist_url_list(artist_letter):
 
 
 def get_song_url_list(artist_url):
+    """
+    Retrieves the AZLyrics website URLs for all the songs from an artist AZLyrics URL.
+    :param artist_url: AZLyrics URL from a given artist.
+    :return: List of pairs containing the song name and its AZLyrics URL.
+    """
     song_url_list = []
 
     try:
@@ -69,6 +84,11 @@ def get_song_url_list(artist_url):
 
 
 def get_song_lyrics(song_url):
+    """
+    Retrieves and cleans the lyrics of a song given its AZLyrics URL.
+    :param song_url: AZLyrics URL from a given song.
+    :return: Cleaned and formatted song lyrics.
+    """
     song_lyrics = ''
 
     try:
