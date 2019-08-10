@@ -1,9 +1,11 @@
+# AZLyrics website
 AZ_LYRICS_BASE_URL = 'https://www.azlyrics.com'
 AZ_LYRICS_ARTIST_LETTER_LIST = [
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
     'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '19'
 ]
 
+# Scrapping
 BASE = 'Mozilla/5.0'
 SCRAPE_PROXY = 'socks5://127.0.0.1:9050'
 SCRAPE_RTD_MINIMUM = 4
@@ -25,6 +27,7 @@ SCRAPE_USER_AGENT_LIST = [
 SCRAPE_RETRIES_AMOUNT = 3
 SCRAPE_SLEEP_TIME_BETWEEN_RETRIES = 10
 
+# CSV
 CSV_FILE = 'data/azlyrics_lyrics'
 CSV_HEADER_ARTIST_NAME = 'ARTIST_NAME'
 CSV_HEADER_ARTIST_URL = 'ARTIST_URL'
@@ -32,6 +35,7 @@ CSV_HEADER_SONG_NAME = 'SONG_NAME'
 CSV_HEADER_SONG_URL = 'SONG_URL'
 CSV_HEADER_LYRICS = 'LYRICS'
 
+# String cleaning
 STR_CLEAN_TIMES = 3
 STR_CLEAN_DICT = {
     '\n\n': '\n',
@@ -57,6 +61,7 @@ STR_CLEAN_DICT = {
     ':.': ':'
 }
 
+# Box integration
 BOX_CONFIG_FILE_PATH = 'data/jwt_config.json'
 BOX_RETRIES = 3
 BOX_RTM = 3

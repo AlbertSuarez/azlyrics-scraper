@@ -5,6 +5,13 @@ from src import *
 
 
 def exists_song(csv_letter, artist_url, song_url):
+    """
+    Checks if a song exists in a given CSV given the artist and song url.
+    :param csv_letter: CSV letter in order to identify which CSV to get.
+    :param artist_url: Artist AZLyrics URL.
+    :param song_url: Song AZLyrics URL.
+    :return: True if the song exists in the CSV, False otherwise.
+    """
     csv_file_name = f'{CSV_FILE}_{csv_letter}.csv'
     exists_file = os.path.isfile(csv_file_name)
     if exists_file:
@@ -17,6 +24,16 @@ def exists_song(csv_letter, artist_url, song_url):
 
 
 def append_to_csv(artist_name, artist_url, song_name, song_url, song_lyrics, csv_letter):
+    """
+    Appends song information into the end of a (in)existing CSV.
+    :param artist_name: Artist name.
+    :param artist_url: Artist AZLyrics URL.
+    :param song_name: Song name.
+    :param song_url: Song AZLyrics URL.
+    :param song_lyrics: Song lyrics.
+    :param csv_letter: CSV letter for getting the CSV where to append.
+    :return: Song information appended.
+    """
     if song_lyrics:
         csv_file_name = f'{CSV_FILE}_{csv_letter}.csv'
         exists_file = os.path.isfile(csv_file_name)
