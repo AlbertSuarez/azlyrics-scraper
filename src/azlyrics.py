@@ -33,7 +33,7 @@ def _get_html(url):
             if i == SCRAPE_RETRIES_AMOUNT - 1:
                 print(f'Unable to retrieve HTML from {url}: {e}')
             else:
-                time.sleep(SCRAPE_SLEEP_TIME_BETWEEN_RETRIES)
+                time.sleep(random.uniform(SCRAPE_RTD_ERROR_MINIMUM, SCRAPE_RTD_ERROR_MAXIMUM))
     return None
 
 
