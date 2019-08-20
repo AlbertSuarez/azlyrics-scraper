@@ -17,9 +17,11 @@ This project is using Python3. All these requirements have been specified in the
 
 1. [Requests](https://2.python-requests.org/en/master/): used for retrieving the HTML content of a website.
 2. [BeautifulSoup](https://pypi.org/project/beautifulsoup4/): used for scraping an HTML content.
-3. [Tqdm](https://tqdm.github.io/): used for having cool and beautiful progessbars.
-4. [Unidecode](https://pypi.org/project/Unidecode/): used for cleaning strings from weird characters.
-5. [Box SDK](https://github.com/box/box-python-sdk): used for uploading/downloading files to/from Box Cloud Storage.
+3. [Tor](https://2019.www.torproject.org/docs/debian.html.en): used for making requests anonymous using other IPs.
+4. [Stem](https://stem.torproject.org/): used for authentificating every request with a different IP.
+5. [Fake User-Agent](https://pypi.org/project/fake-useragent/): used for using random User-Agent's for every request.
+6. [Unidecode](https://pypi.org/project/Unidecode/): used for cleaning strings from weird characters.
+7. [Box SDK](https://github.com/box/box-python-sdk): used for uploading/downloading files to/from Box Cloud Storage.
 
 ## Recommendations
 
@@ -39,7 +41,22 @@ To run this script, please execute the following from the root directory:
 
 3. Move [JWT configuration](#jwt-configuration) file from Box API
 
-4. Run the script
+4. Install [Tor browser](https://2019.www.torproject.org/docs/debian.html.en)
+
+5. Configure Tor IP renewal editting `/etc/tor/torrc` file
+
+   ```
+   ControlPort 9051
+   CookieAuthentication 1
+   ```
+
+6. Restart Tor browser
+
+  ```bash
+  sudo service tor restart
+  ```
+
+7. Run the script
 
   ```bash
   python3 -m src

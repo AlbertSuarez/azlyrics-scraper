@@ -6,25 +6,12 @@ AZ_LYRICS_ARTIST_LETTER_LIST = [
 ]
 
 # Scrapping
-BASE = 'Mozilla/5.0'
-SCRAPE_RTD_MINIMUM = 4
-SCRAPE_RTD_MAXIMUM = 6
-SCRAPE_USER_AGENT_USE_RANDOM = False
-SCRAPE_USER_AGENT = f'{BASE} (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) ' \
-    f'Chrome/75.0.3770.100 Safari/537.36'
-SCRAPE_USER_AGENT_LIST = [
-    f'{BASE} (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36',
-    f'{BASE} (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
-    f'{BASE} (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0',
-    f'{BASE} (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko',
-    f'{BASE} (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.80 Safari/537.36',
-    f'{BASE} (Macintosh; Intel Mac OS X 10.14; rv:67.0) Gecko/20100101 Firefox/67.0',
-    f'{BASE} (X11; Linux x86_64; rv:67.0) Gecko/20100101 Firefox/67.0',
-    f'{BASE} (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36',
-    f'{BASE} (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'
-]
+SCRAPE_PROXY = 'socks5://127.0.0.1:9050'
+SCRAPE_RTD_MINIMUM = 15
+SCRAPE_RTD_MAXIMUM = 60
 SCRAPE_RETRIES_AMOUNT = 3
-SCRAPE_SLEEP_TIME_BETWEEN_RETRIES = 10
+SCRAPE_RTD_ERROR_MINIMUM = 150
+SCRAPE_RTD_ERROR_MAXIMUM = 300
 
 # CSV
 CSV_FILE = 'data/azlyrics_lyrics'
@@ -74,13 +61,12 @@ BOX_LINK_ALLOW_PREVIEW = True
 __all__ = [
     'AZ_LYRICS_BASE_URL',
     'AZ_LYRICS_ARTIST_LETTER_LIST',
+    'SCRAPE_PROXY',
     'SCRAPE_RTD_MINIMUM',
     'SCRAPE_RTD_MAXIMUM',
-    'SCRAPE_USER_AGENT_USE_RANDOM',
-    'SCRAPE_USER_AGENT',
-    'SCRAPE_USER_AGENT_LIST',
     'SCRAPE_RETRIES_AMOUNT',
-    'SCRAPE_SLEEP_TIME_BETWEEN_RETRIES',
+    'SCRAPE_RTD_ERROR_MINIMUM',
+    'SCRAPE_RTD_ERROR_MAXIMUM',
     'CSV_FILE',
     'CSV_HEADER_ARTIST_NAME',
     'CSV_HEADER_ARTIST_URL',
