@@ -20,10 +20,9 @@ def _get_html(url):
     time.sleep(random.uniform(SCRAPE_RTD_MINIMUM, SCRAPE_RTD_MAXIMUM))  # RTD
     for i in range(0, SCRAPE_RETRIES_AMOUNT):
         try:
-            with Controller.from_port(port = 9051) as c:
+            with Controller.from_port(port=9051) as c:
                 c.authenticate()
                 c.signal(Signal.NEWNYM)
-
             proxies = {'http': SCRAPE_PROXY, 'https': SCRAPE_PROXY}
             headers = {'User-Agent': UserAgent().random}
             response = requests.get(url, proxies=proxies, headers=headers)
