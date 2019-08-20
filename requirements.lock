@@ -3,6 +3,8 @@ beautifulsoup4==4.7.1
 tqdm==4.32.2
 Unidecode==1.1.1
 boxsdk==2.5.0
+stem==1.7.1
+fake-useragent==0.1.11
 ## The following requirements were added by pip freeze:
 asn1crypto==0.24.0
 attrs==19.1.0

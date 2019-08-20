@@ -3,6 +3,9 @@ import random
 import requests
 
 from bs4 import BeautifulSoup
+from stem import Signal
+from stem.control import Controller
+from fake_useragent import UserAgent
 
 from src import *
 from src import string_cleaner
@@ -17,11 +20,12 @@ def _get_html(url):
     time.sleep(random.uniform(SCRAPE_RTD_MINIMUM, SCRAPE_RTD_MAXIMUM))  # RTD
     for i in range(0, SCRAPE_RETRIES_AMOUNT):
         try:
-            if SCRAPE_USER_AGENT_USE_RANDOM:
-                headers = {'User-Agent': random.choice(SCRAPE_USER_AGENT_LIST)}
-            else:
-                headers = {'User-Agent': SCRAPE_USER_AGENT}
+            with Controller.from_port(port = 9051) as c:
+                c.authenticate()
+                c.signal(Signal.NEWNYM)
+
             proxies = {'http': SCRAPE_PROXY, 'https': SCRAPE_PROXY}
+            headers = {'User-Agent': UserAgent().random}
             response = requests.get(url, proxies=proxies, headers=headers)
             assert response.ok
             html_content = response.content
