@@ -46,4 +46,9 @@ def scrape():
 
 
 if __name__ == '__main__':
-    scrape()
+    iteration = 1
+    while True:
+        print(f'Starting iteration number {iteration}...')
+        scrape()
+        iteration += 1
+
