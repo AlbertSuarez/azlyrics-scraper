@@ -26,6 +26,7 @@ def scrape():
         artist_url_list = azlyrics.get_artist_url_list(artist_letter)
         print(f'[1] ---> {len(artist_url_list)} artists found with letter [{artist_letter}]')
         for artist_name, artist_url in artist_url_list:
+            some_song_added = False
             print(f'[2] Scraping song URLs for {artist_name}...')
             song_url_list = azlyrics.get_song_url_list(artist_url)
             print(f'[2] ---> {len(artist_url_list)} artists found with letter [{artist_letter}]')
@@ -34,11 +35,13 @@ def scrape():
                 if not csv_parser.exists_song(artist_letter, artist_url, song_url):
                     song_lyrics = azlyrics.get_song_lyrics(song_url)
                     csv_parser.append_to_csv(artist_name, artist_url, song_name, song_url, song_lyrics, artist_letter)
+                    some_song_added = True
             # Uploads or updates the CSV on Box per every artist.
-            if file_id:
-                file_id = box_sdk.update_file(file_id, csv_file_name)
-            else:
-                file_id = box_sdk.upload_file(BOX_FOLDER_APP_ID, csv_file_name)
+            if some_song_added:
+                if file_id:
+                    file_id = box_sdk.update_file(file_id, csv_file_name)
+                else:
+                    file_id = box_sdk.upload_file(BOX_FOLDER_APP_ID, csv_file_name)
 
         # Removes the local version of the CSV for saving storage.
         if os.path.isfile(csv_file_name):
