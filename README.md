@@ -7,7 +7,7 @@
 [![GitHub contributors](https://img.shields.io/github/contributors/AlbertSuarez/azlyrics-scraper.svg)](https://GitHub.com/AlbertSuarez/azlyrics-scraper/graphs/contributors/)
 [![GitHub license](https://img.shields.io/github/license/AlbertSuarez/azlyrics-scraper.svg)](https://github.com/AlbertSuarez/azlyrics-scraper/blob/master/LICENSE)
 
-[Box folder URL](https://app.box.com/s/vats4n6slxtknuaxz58mxlo6ry8v04pd) | [Static repo website](https://asuarez.dev/azlyrics-scraper/)
+[Box folder URL](https://app.box.com/s/vats4n6slxtknuaxz58mxlo6ry8v04pd) | [Static repo website](https://asuarez.dev/azlyrics-scraper/) | [Kaggle dataset](https://www.kaggle.com/albertsuarez/azlyrics)
 
 🎵 AZLyrics scraper for getting all the song lyrics and publishing to Box.
 
